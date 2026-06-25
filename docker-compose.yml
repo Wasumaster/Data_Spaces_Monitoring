@@ -1,0 +1,21 @@
+# ============================================================
+# Federated EO Data Space — Docker Compose
+# Start both services with:  docker compose up --build
+# ============================================================
+
+services:
+  backend:
+    build: ./backend
+    container_name: eo-dataspace-backend
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: eo-dataspace-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
